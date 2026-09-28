@@ -22,9 +22,12 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:6.0.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-//    compileOnly("com.github.YourUsername:hytale-api:1.0.0")
 
-    compileOnly(files("libs/HytaleServer.jar"))
+    // Only load the local Hytale JAR if we are NOT building on JitPack
+    compileOnly("com.hypixel.hytale:Server:+")
+    if (System.getenv("JITPACK") != "true") {
+        compileOnly(files("libs/HytaleServer.jar"))
+    }
 
     // Lombok
     compileOnly("org.projectlombok:lombok:$lombokVersion")
@@ -33,6 +36,7 @@ dependencies {
     testCompileOnly("org.projectlombok:lombok:$lombokVersion")
     testAnnotationProcessor("org.projectlombok:lombok:$lombokVersion")
 }
+
 
 publishing {
     publications {
