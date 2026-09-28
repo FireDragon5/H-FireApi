@@ -23,11 +23,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
-    // Only load the local Hytale JAR if we are NOT building on JitPack
-    compileOnly("com.hypixel.hytale:Server:+")
-    if (System.getenv("JITPACK") != "true") {
-        compileOnly(files("libs/HytaleServer.jar"))
-    }
+    compileOnly(files("libs/HytaleServer.jar"))
 
     // Lombok
     compileOnly("org.projectlombok:lombok:$lombokVersion")
