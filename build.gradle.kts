@@ -1,6 +1,5 @@
 plugins {
     id("java")
-    `maven-publish`
 }
 
 java {
@@ -33,14 +32,6 @@ dependencies {
     testAnnotationProcessor("org.projectlombok:lombok:$lombokVersion")
 }
 
-
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            from(components["java"])
-        }
-    }
-}
 
 tasks.test {
     useJUnitPlatform()
