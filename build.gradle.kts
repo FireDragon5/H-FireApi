@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("maven-publish")
 }
 
 java {
@@ -8,8 +9,8 @@ java {
     withJavadocJar()
 }
 
-group = "me.firedragon5"
-version = "1.0"
+group = providers.gradleProperty("group").getOrElse("me.firedragon5")
+version = providers.gradleProperty("version").getOrElse("1.0")
 val lombokVersion = "1.18.40"
 
 repositories {
@@ -42,4 +43,12 @@ tasks.jar {
 
     from("src/main/resources")
 //    destinationDirectory.set(file("C:\\Users\\antho\\AppData\\Roaming\\Hytale\\UserData\\Mods"))
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+        }
+    }
 }
